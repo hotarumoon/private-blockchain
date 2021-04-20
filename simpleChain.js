@@ -2,19 +2,19 @@
 |  Learn more: Crypto-js: https://github.com/brix/crypto-js      |
 |  =============================================================*/
 
-const SHA256 = require('crypto-js/sha256');
+const SHA256 = require("crypto-js/sha256");
 
 /* ===== Block Class ===================================
 |  Class with a constructor for block data model       |
 |  ====================================================*/
 
 class Block {
-  constructor(data){
-    this.height = '';
-    this.timeStamp = '';
+  constructor(data) {
+    this.height = "";
+    this.timeStamp = "";
     this.data = data;
-    this.previousHash = '0x';
-    this.hash = '';
+    this.previousHash = "0x";
+    this.hash = "";
   }
 }
 
@@ -29,30 +29,30 @@ class Block {
 |     - validateChain()                                |
 |  ====================================================*/
 
-class Blockchain{
-    constructor(){
-      // new chain array
-      this.chain = [];
-      // add first genesis block
-      this.addBlock(this.createGenesisBlock());
+class Blockchain {
+  constructor() {
+    // new chain array
+    this.chain = [];
+    // add first genesis block
+    this.addBlock(this.createGenesisBlock());
   }
 
-  createGenesisBlock(){
+  createGenesisBlock() {
     return new Block("First block in the chain - Genesis block");
   }
 
   // getLatest block method
-  getLatestBlock(){
-    return this.chain[this.chain.length -1];
+  getLatestBlock() {
+    return this.chain[this.chain.length - 1];
   }
 
-   // addBlock method
-  addBlock(newBlock){
+  // addBlock method
+  addBlock(newBlock) {
     // block height
     newBlock.height = this.chain.length;
     // UTC timestamp
-    newBlock.timeStamp = new Date().getTime().toString().slice(0,-3);
-    if (this.chain.length>0) {
+    newBlock.timeStamp = new Date().getTime().toString().slice(0, -3);
+    if (this.chain.length > 0) {
       // previous block hash
       newBlock.previousHash = this.getLatestBlock().hash;
     }
@@ -62,3 +62,4 @@ class Blockchain{
     // add block to chain
     this.chain.push(newBlock);
   }
+}
